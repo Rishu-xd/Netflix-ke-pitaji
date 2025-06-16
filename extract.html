@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IMDb Trending Scraper (Browser-Only)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white p-8">
+
+  <h1 class="text-3xl font-bold mb-4 text-yellow-400">IMDb Trending Movies</h1>
+  <button id="scrapeBtn" class="bg-yellow-500 hover:bg-yellow-600 px-4 py-2 rounded font-bold mb-6">
+    🔍 Scrape IMDb (No API)
+  </button>
+
+  <div id="status" class="mb-4 text-gray-400">Waiting...</div>
+  <div id="results" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+
+  <script type="module">
+    import { loadPyodide } from "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.mjs";
+
+    let pyodide = await loadPyodide();
+    await pyodide.loadPackage("micropip");
+    await pyodide.runPythonAsync("import re");
+
+    document.getElementById("status").textContent = "✅ Pyodide Ready";
+
+    document.getElementById("scrapeBtn").addEventListener("click", async () => {
+      const status = document.getElementById("status");
+      const results = document.getElementById("results");
+      results.innerHTML = "";
+      status.textContent = "🔄 Fetching IMDb page...";
+
+      const proxy = "https://api.allorigins.win/raw?url=";
+      const imdbURL = "https://www.imdb.com/chart/moviemeter/";
+
+      let html = null;
+      try {
+        const res = await fetch(proxy + encodeURIComponent(imdbURL));
+        html = await res.text();
+      } catch (e) {
+        status.textContent = "❌ Failed to load IMDb through proxy.";
+        return;
+      }
+
+      status.textContent = "🔍 Parsing HTML with Python...";
+
+      try {
+        pyodide.globals.set("html", html);
+        await pyodide.runPythonAsync(`
+import re
+
+def extract_movies(html):
+    titles = re.findall(r'<img[^>]+alt="([^"]+)"[^>]*>', html)
+    posters = re.findall(r'<img[^>]+src="(https://m\\.media-amazon\\.com/images/[^"]+)"', html)
+    return list(zip(titles, posters))
+
+results = extract_movies(html)[:20]  # Top 20 trending
+        `);
+
+        const movies = pyodide.globals.get("results").toJs();
+
+        if (!movies.length) {
+          status.textContent = "❌ Could not extract movie data.";
+          return;
+        }
+
+        status.textContent = `✅ Found ${movies.length} trending movies`;
+
+        movies.forEach(([title, poster]) => {
+          const div = document.createElement("div");
+          div.className = "bg-gray-800 rounded p-2 text-center";
+          div.innerHTML = `
+            <img src="${poster}" class="rounded w-full mb-2" />
+            <div class="text-sm">${title}</div>
+          `;
+          results.appendChild(div);
+        });
+
+      } catch (err) {
+        status.textContent = "❌ Python error while parsing HTML.";
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
