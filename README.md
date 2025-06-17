@@ -16,7 +16,7 @@ Watch all your favourite movies, web series, TV shows and anime for free.
 Clone the project
 
 ```bash
-  git clone https://github.com/pulkitpareek18/netflix
+  git clone https://github.com/Rishu-xd/Netflix-ke-pitaj
 ```
 
 Open the project directory and run `index.html`.
@@ -43,6 +43,7 @@ Open the project directory and run `index.html`.
 ## Authors
 
 - [@pulkitpareek18](https://www.github.com/pulkitpareek18)
+- [@Rishu-xd](https://www.github.com/Rishu-xd)
 
 
 ## Contributing
