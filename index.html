@@ -38,7 +38,10 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9489381289747189"
      crossorigin="anonymous"></script>
  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 </head>
 
@@ -141,6 +144,7 @@
   const span = document.querySelector(".search-container span");
   const epcontainer = document.querySelector(".episode-container");
   const  clickder = document.querySelector(".season");
+  const image = document.querySelector(".search-container img");
 
   let active = false;
 
@@ -164,10 +168,12 @@
       button.classList.add("active");
       input.classList.add("active");
       span.classList.add("active");
+      image.classList.add("active");
     } else {
       button.classList.remove("active");
       input.classList.remove("active");
       span.classList.remove("active");
+      image.classList.remove("active");
     }
   });
 </script>
