@@ -54,10 +54,10 @@ If you have any new Idea or have found a bug, please don't hesitate to open a Pu
 
 ## License
 
-[MIT](https://github.com/pulkitpareek18/netflix/blob/main/LICENSE)
+[MIT](https://github.com/Rishu-xd/Netflix-ke-pitaji/LICENSE)
 
 
 ## Support
 
-For support, email pulkitpareekofficial@gmail.com or ask any query on Twitter.
+For support, email rishu99xd@gamail.com or ask any query on Twitter.
 
