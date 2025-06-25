@@ -204,5 +204,26 @@
   });
 </script>
 
+  <script>
+  // Create a unique session ID
+  const sessionId = Math.random().toString(36).substring(2);
+
+  // Send "join" signal when user opens page
+  fetch("https://hook.eu2.make.com/fykk17kltps7xq7jjdgpvtxvo157kwbe", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sessionId, action: "join" })
+  });
+
+  // Send "leave" signal when user closes or reloads
+  window.addEventListener("beforeunload", () => {
+    navigator.sendBeacon(
+      "https://hook.eu2.make.com/fykk17kltps7xq7jjdgpvtxvo157kwbe",
+      JSON.stringify({ sessionId, action: "leave" })
+    );
+  });
+</script>
+
+
 </body>
 </html>
