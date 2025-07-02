@@ -1,8 +1,25 @@
 .search-container {
-  display: flex;
+display: flex
+;
+    height: 7vh;
+    position: fixed;
+    justify-content: flex-end;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    background: #9a575700;
+    border-radius: 42px;
+    backdrop-filter: blur(2px);
+        border: solid 1px #0089ff;
+
+}
+
+.hedder{
+   display: flex;
   height: 10vh;
   position: fixed;
-  justify-content: flex-start;
+  justify-content: space-around;
   align-content: center;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -39,7 +56,7 @@ input {
   background: border-box;
   border: none;
   color: #fff;
-  visibility: hidden;
+
 }
 
 button {
@@ -57,18 +74,94 @@ button {
   align-items: center;
   background: none;
   border: none;
+
   transition: all 0.4s ease;
+  display: block;
 }
+
+
+.infor{
+   color: #fff;
+    position: absolute;
+    z-index: 5;
+    margin-left: -185vh;
+    cursor: pointer;
+}
+
+.infor svg{
+  cursor: pointer;
+    
+    position: absolute;
+    margin-top: -26px;
+    margin-left: -23px;
+}
+
+
+.alwaysVisibleContent{
+  margin-top: 35vh;
+}
+
+.alwaysVisibleContent h1{
+  font-size: 4vw;
+}
+
+.alwaysVisibleContent h3{
+  font-size: 2vw;
+}
+.sidebar{
+  background: #312d2d;
+   
+    position: absolute;
+    width: 50vh;
+ 
+    margin-top: -43px;
+    height: 102vh;
+    z-index: -1;
+    margin-left: -57vh;
+    display: block;
+    transition: all 0.4s ease;
+    
+
+}
+
+.sidebar.active{
+  background: #312d2d;
+   
+    position: absolute;
+    width: 50vh;
+    overflow: hidden;
+    overflow-y: auto;
+ 
+    margin-top: -43px;
+    height: 102vh;
+    z-index: -1;
+    margin-left: -7vh;
+    display: block;
+    transition: all 0.4s ease;
+ 
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+
 button svg {
   margin-right: 5px;
+  display: block;
+  width: 37px;
 }
 
 button:hover {
   font-weight: 700;
-  color: #00fff5;
+  
   /* background-color: #00f7ff; */
   /* box-shadow: rgba(2, 255, 242, .596) 0 0 1.6vw .2vw */
   transition: all 0.4s ease;
+}
+
+button svg:hover .circle{
+  r:10;
 }
 
 button:hover p {
@@ -95,7 +188,7 @@ button:hover p {
   width: 40vh;
 }
 
-.search-container img {
+.hedder img {
   width: 127px;
   position: absolute;
   display: flex;
@@ -142,6 +235,7 @@ input.active {
   margin-left: 3vh;
   margin-bottom: 18vh;
   font-size: 31px;
+      z-index: -1;
 }
 
 .season img {
@@ -296,11 +390,16 @@ a {
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #111;
+  background:url(download.jpg);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+align-items: center;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
 }
 
 h1,
@@ -328,7 +427,7 @@ iframe {
 }
 
 .information {
-  margin: 5vw;
+  margin: 2vw;
 }
 
 .information h3 {
@@ -338,12 +437,12 @@ iframe {
 
 .information p {
   color: #39cdbc;
-  font-size: 2vw;
+  font-size: 1vw;
   font-weight: 700;
 }
 
 h2 {
-  font-size: xxx-large;
+  font-size: 3vw;
   font-weight: 100;
   font-variant-caps: all-petite-caps;
 }
@@ -430,6 +529,7 @@ li {
   .result {
     width: 25vw;
     margin: 2vw;
+    margin-top: 12vh;
   }
 
   .hoverClass {
@@ -474,10 +574,29 @@ li {
     font-size: 6vw;
   }
 
+  .information{
+    display: none;
+  }
+
+  .info{
+    display: none;
+  }
+
+  .infor{
+    display: none;
+  }
+
   .information h3 {
     font-size: 11vw;
   }
 
+  body{
+    background-size: cover;
+  }
+  
+  .alwaysVisibleContent{
+    margin-top: 0vh;
+  }
   button {
     padding: 0.48rem 0.4rem;
     margin-left: 50vh;
