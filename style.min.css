@@ -574,6 +574,10 @@ li {
     font-size: 6vw;
   }
 
+iframe {
+margin-top: 12vh;
+}
+
   .information{
     display: none;
   }
