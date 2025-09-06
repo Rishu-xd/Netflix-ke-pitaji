@@ -798,3 +798,40 @@ margin-top: 12vh;
     margin: 1vw;
   }
 }
+/* Season Enhancements */
+.season.active-season {
+    background: rgba(57, 205, 188, 0.2);
+    border: 2px solid #39cdbc;
+    box-shadow: rgba(57, 205, 188, 0.5) 0 0 5vw 1vw;
+}
+
+.season img {
+    transition: all 0.3s ease;
+}
+
+.season:hover img {
+    transform: scale(1.05);
+    box-shadow: rgba(57, 205, 188, 0.4) 0 4px 20px;
+}
+
+.episode-container.visible {
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; max-height: 0; transform: translateY(-10px); }
+    to { opacity: 1; max-height: 500px; transform: translateY(0); }
+}
+
+.episodes {
+    transition: all 0.3s ease;
+}
+
+.episodes:hover {
+    transform: translateY(-2px);
+    box-shadow: rgba(57, 205, 188, 0.4) 0 8px 25px;
+}
+
+.episodes.selected {
+    box-shadow: rgba(57, 205, 188, 0.6) 0 0 20px;
+}
