@@ -1,90 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#4285f4" />
-  <meta name="robots" content="index, follow">
-  <meta property="og:image" content="https://netflix-1uh.pages.dev/og.jpg" />
-  <meta name="description" content="Discover and stream your favorite movies and TV shows with NETFLIX KE PITAJI - an open source content search and watch website. Enjoy unlimited access to a vast library of content for free.">
-  <title>NETFLIX KE PITAJI</title>
-  <link rel="preload stylesheet" href="style.min.css" as="style">
-  <link rel="preload stylesheet" href="center-atom.min.css" as="style">
-  <link rel="stylesheet" href="style.min.css">
-  <script async src="jquery.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>We’ll be back soon</title>
+  <style>
+    :root{
+      --bg: #0b0f19;
+      --card: rgba(255,255,255,0.06);
+      --card-2: rgba(255,255,255,0.04);
+      --text: #e6e9ef;
+      --muted: #a4adba;
+      --primary: #5b8cff;
+      --accent: #7af0d8;
+      --danger: #ff4d6d;
+      --glow: 0 10px 40px rgba(91,140,255,.25);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --grid-gap: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(123,240,216,.15), transparent 60%),
+                  radial-gradient(1000px 500px at -10% 110%, rgba(91,140,255,.15), transparent 60%),
+                  var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+    .wrap{
+      width: min(960px, 100%);
+      display: grid;
+      gap: var(--grid-gap);
+    }
+    .card{
+      background: linear-gradient(160deg, var(--card), var(--card-2));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+    }
+    .header{
+      padding: 28px 28px 8px;
+      display: grid;
+      gap: 10px;
+    }
+    .badge{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(91,140,255,0.12);
+      color: #bfd3ff;
+      font-weight: 600;
+      width: fit-content;
+      box-shadow: var(--glow);
+    }
+    .badge svg{ flex: 0 0 20px; }
+    h1{
+      margin: 0;
+      font-size: clamp(26px, 4vw, 42px);
+      letter-spacing: .3px;
+      line-height: 1.15;
+    }
+    p.lead{
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(14px, 1.9vw, 18px);
+      line-height: 1.6;
+    }
+    .grid{
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: var(--grid-gap);
+      padding: 8px 28px 28px;
+    }
+    @media (max-width: 860px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+    .panel{
+      background: rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      padding: 18px;
+      display: grid;
+      gap: 16px;
+    }
+    .row{ display: grid; gap: 12px; }
+    .progress{
+      height: 10px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+    .bar{
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: 0 0 20px rgba(122,240,216,.35);
+      transition: width .6s ease;
+    }
+    .chips{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .chip{
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #dfe7ff;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .countdown{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    .tile{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 14px;
+      border-radius: 14px;
+      text-align: center;
+    }
+    .tile .num{
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 800;
+      letter-spacing: .5px;
+    }
+    .tile .lbl{
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .actions{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.18); }
+    .btn.primary{ background: linear-gradient(135deg, var(--primary), #7aa8ff); border-color: transparent; color: #0b1220; box-shadow: var(--glow); }
+    .btn svg{ width: 20px; height: 20px; }
+    .footer{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 28px 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .icons{
+      display: flex;
+      gap: 12px;
+    }
+    .icon-btn{
+      width: 42px; height: 42px;
+      display: grid; place-items: center;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .icon-btn:hover{ transform: translateY(-2px); background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.18); }
+    .icon-btn svg{ width: 22px; height: 22px; }
+    .glow{
+      position: absolute; inset: -1px;
+      background: radial-gradient(600px 200px at 20% -20%, rgba(122,240,216,.12), transparent 60%),
+                  radial-gradient(500px 200px at 120% 120%, rgba(91,140,255,.12), transparent 60%);
+      z-index: -1; filter: blur(2px);
+    }
+  </style>
 </head>
 <body>
-  <div class="search-container">
-    <input type="search" id="search-input" placeholder="Search any Movie/Webseries/Anime">
-    <button id="search-button">Search</button>
-  </div>
+  <main class="wrap">
+    <section class="card">
+      <div class="glow"></div>
+      <header class="header">
+        <div class="badge">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.74 13.05a2 2 0 0 0-2.79-.3l-1.29 1-5.29-3.79 2.1-2.66 1.21.93a2 2 0 1 0 2.46-3.14l-6.5-5a2 2 0 0 0-2.8 .34l-1.5 1.9a2 2 0 0 0 .33 2.8l1.2.92-6.71 8.51a2.5 2.5 0 0 0 .39 3.51l3.43 2.8a2.5 2.5 0 0 0 3.51-.39l6.69-8.49 5.29 3.79-.94 1.2a2 2 0 1 0 3.14 2.46l1.5-1.9a2 2 0 0 0-.3-2.79z"/></svg>
+          Scheduled Maintenance
+        </div>
+        <h1>Sorry, we’re under maintenance</h1>
+        <p class="lead">We’re upgrading the experience and will be back shortly. Thanks for your patience and support.</p>
+      </header>
 
-  <center>
-    <div id="video" class="video">
-      <div class="server-container" id="server-container">
-        <div class="server-buttons" id="server-buttons"></div>
-        <div class="loading-indicator" id="loading-indicator">⏳ Loading server...</div>
-        <div class="server-info" id="server-info">
-          Select a server to start streaming. If one server doesn't work, try another.
+      <div class="grid">
+        <div class="panel">
+          <div class="row">
+            <strong>Progress</strong>
+            <div class="progress"><div class="bar" id="bar"></div></div>
+          </div>
+          <div class="row">
+            <strong>What’s happening</strong>
+            <div class="chips">
+              <span class="chip">Performance upgrades</span>
+              <span class="chip">Bug fixes</span>
+              <span class="chip">Server scaling</span>
+              <span class="chip">UI polish</span>
+            </div>
+          </div>
+          <div class="row actions">
+            <a class="btn primary" href="#" id="notifyBtn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 22a2 2 0 0 0 2-2h-4a2 2 0 0 0 2 2m6-6v-5a6 6 0 0 0-5-5.91V4a1 1 0 1 0-2 0v1.09A6 6 0 0 0 6 11v5l-2 2v1h16v-1z"/></svg>
+              Notify me
+            </a>
+            <a class="btn" href="mailto:yourmail@gmail.com">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 8l-8 5-8-5V6l8 5 8-5m0-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/></svg>
+              Contact support
+            </a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <strong>Back online in</strong>
+          <div class="countdown" id="countdown">
+            <div class="tile"><div class="num" id="d">–</div><div class="lbl">Days</div></div>
+            <div class="tile"><div class="num" id="h">–</div><div class="lbl">Hours</div></div>
+            <div class="tile"><div class="num" id="m">–</div><div class="lbl">Minutes</div></div>
+            <div class="tile"><div class="num" id="s">–</div><div class="lbl">Seconds</div></div>
+          </div>
+          <div class="row">
+            <strong>Stay connected</strong>
+            <div class="icons">
+              <a class="icon-btn" href="https://t.me/your_channel" target="_blank" aria-label="Telegram">
+                <!-- Telegram -->
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M9.04 15.3l-.37 5.23c.53 0 .77-.23 1.05-.51l2.52-2.41 5.22 3.83c.96.53 1.64.25 1.9-.89l3.45-16.16.01-.01c.31-1.45-.53-2.02-1.46-1.67L1.5 10.1c-1.41.55-1.39 1.34-.24 1.7l5.86 1.83L18.9 6.9c.64-.41 1.22-.19.74.22"/>
+                </svg>
+              </a>
+              <a class="icon-btn" href="https://instagram.com/your_handle" target="_blank" aria-label="Instagram">
+                <!-- Instagram -->
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7m5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10m6.5-.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/>
+                </svg>
+              </a>
+              <a class="icon-btn" href="mailto:yourmail@gmail.com" aria-label="Email">
+                <!-- Gmail-like envelope -->
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 4l-8 5L4 8V6l8 5l8-5"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <iframe id="iframe" src="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <footer class="footer">
+        <span>© <span id="yr"></span> Your Brand. All rights reserved.</span>
+        <span id="tip">Tip: Press N to toggle notifications.</span>
+      </footer>
+    </section>
+  </main>
 
-      <p style="color: rgb(79, 221, 221); font-weight: 500;">
-        In case of any Error or Too Much Buffering, try switching servers using the buttons above or click again on your Movie poster down below.
-      </p>
+  <script>
+    // Countdown target: set minutes from now
+    const MAINT_MINUTES = 90; // change as needed
+    const endAt = Date.now() + MAINT_MINUTES * 60 * 1000;
 
-      <div class="addthis_inline_share_toolbox"></div>
-      <div id="webSeriesData"></div>
-    </div>
-  </center>
+    const dEl = document.getElementById('d');
+    const hEl = document.getElementById('h');
+    const mEl = document.getElementById('m');
+    const sEl = document.getElementById('s');
+    const bar = document.getElementById('bar');
+    const yr = document.getElementById('yr');
 
-  <div id="results"></div>
+    yr.textContent = new Date().getFullYear();
 
-  <center style="margin-top: 2vh;">
-    <div class="alwaysVisibleContent">
-      <h1><u>NETFLIX KE PITAJI</u></h1>
-      <h2 style="color: rgb(55, 255, 255);">Netflix, on us. Free</h2>
-      <h3>Search any Movie/Webseries/Anime</h3>
-      <div class="pagelinks">
-        <a href="/privacy-policy.html" target="_blank">Privacy Policy</a>
-        <a href="/terms-and-conditions.html" target="_blank">Terms And Conditions</a>
-        <a href="" target="_blank">Source Code</a>
-        <a href="/contact.html" target="_blank">Contact</a>
-      </div>
-    </div>
+    const total = endAt - Date.now();
 
-    <div class="information">
-      <h2><u>PROJECT INFORMATION</u></h2>
-      <h3>Introduction</h3>
-      <p>
-        Netflix ke Pitaji is a one-of-a-kind, open-source project that allows users to search and retrieve
-        data about Movies and Web Shows available on the Internet. Now enhanced with multiple server options
-        for better streaming experience.
-      </p>
+    function fmt(n){ return String(n).padStart(2,'0'); }
 
-      <h3>Server Options</h3>
-      <p>
-        Choose from multiple streaming servers including Vidstream, MyCloud, Streamtape, Mp4Upload, Doodstream,
-        Hydrax, and Filemoon for optimal viewing experience.
-      </p>
+    function tick(){
+      const now = Date.now();
+      const remain = Math.max(0, endAt - now);
+      const days = Math.floor(remain / (24*60*60*1000));
+      const hours = Math.floor((remain % (24*60*60*1000))/(60*60*1000));
+      const mins = Math.floor((remain % (60*60*1000))/(60*1000));
+      const secs = Math.floor((remain % (60*1000))/1000);
 
-      <h3>Libraries Used</h3>
-      <div class="footerLinks">
-        <a href="https://2embed.to" target="_blank">2Embed</a>
-        <a href="https://jquery.com/" target="_blank">jQuery</a>
-        <a href="https://github.hubspot.com/pace/" target="_blank">PACE</a>
-        <a href="https://www.themoviedb.org/" target="_blank">TMDB</a>
-        <a href="https://www.imdb.com/" target="_blank">IMDB</a>
-      </div>
-    </div>
-  </center>
+      dEl.textContent = days;
+      hEl.textContent = fmt(hours);
+      mEl.textContent = fmt(mins);
+      sEl.textContent = fmt(secs);
 
-  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
-  <script src="script.min.js"></script>
+      const progress = 1 - (remain / total);
+      bar.style.width = (progress*100).toFixed(2) + '%';
+
+      if(remain <= 0) clearInterval(timer);
+    }
+    const timer = setInterval(tick, 1000);
+    tick();
+
+    // Simple Notify toggle
+    const notifyBtn = document.getElementById('notifyBtn');
+    let wantsNotify = false;
+    function toast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.style.position='fixed';
+      t.style.left='50%';
+      t.style.bottom='28px';
+      t.style.transform='translateX(-50%)';
+      t.style.padding='12px 16px';
+      t.style.borderRadius='12px';
+      t.style.background='rgba(0,0,0,.75)';
+      t.style.color='#fff';
+      t.style.fontWeight='600';
+      t.style.boxShadow='0 10px 30px rgba(0,0,0,.35)';
+      t.style.zIndex='9999';
+      document.body.appendChild(t);
+      setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; }, 1800);
+      setTimeout(()=>{ t.remove(); }, 2300);
+    }
+    function toggleNotify(){
+      wantsNotify = !wantsNotify;
+      toast(wantsNotify ? 'Notifications enabled (simulated)' : 'Notifications disabled');
+    }
+    notifyBtn.addEventListener('click', e=>{ e.preventDefault(); toggleNotify(); });
+    document.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='n'){ toggleNotify(); } });
+  </script>
 </body>
 </html>
